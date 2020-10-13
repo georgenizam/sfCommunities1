@@ -1,0 +1,80 @@
+<aura:component implements="flexipage:availableForAllPageTypes, forceCommunity:availableForAllPageTypes, force:hasRecordId" controller="LeadSinglePageController" access="global">  
+  <aura:attribute name="leadId" type="String" default="{!v.recordId}"/> 
+  <aura:attribute name="titleForm" type="String" default=""/>  
+  <aura:attribute name="leadRecord" type="Object"/>    
+  <aura:attribute name="isModalLeadOpen" type="Boolean" default="false"/>
+  <aura:attribute name="leadEdit" type="Boolean"/>
+  <aura:attribute name="isModalEmailOpen" type="Boolean" default="false"/>
+  
+  <aura:registerEvent name="addDaysName" type="c:addDaysEvent"/>
+  <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+  
+
+  <aura:if isTrue="{!v.isModalLeadOpen}">
+    <c:leadModal isModalOpen="{!v.isModalLeadOpen}" titleForm="{!v.titleForm}" edit="{!v.leadEdit}" leadId="{!v.leadId}"/>  
+  </aura:if>    
+  <aura:if isTrue="{!v.isModalEmailOpen}">
+    <c:emailModal isModalOpen="{!v.isModalEmailOpen}" leadId="{!v.leadId}"/>  
+  </aura:if>    
+  
+  <div class="slds-page-header header-color-white slds-box">    
+    <div class="slds-grid">    
+      <div class="slds-col slds-has-flexi-truncate">    
+        <div class="slds-media slds-no-space slds-grow">
+          <div class="slds-media__figure">
+
+          </div>
+          <div class="slds-media__body">
+            <p class="slds-text-title_caps slds-line-height_reset">Lead</p>
+            <h1 class="slds-page-header__title slds-m-right_small slds-align-middle slds-truncate" title="{!v.leadRecord.Name}">{!v.leadRecord.Name}</h1>
+          </div>
+        </div>    
+      </div>    
+      <div class="slds-col slds-no-flex slds-grid slds-align-top">
+        <div class="slds-button-group slds-m-horizontal_x-medium" role="group">          
+          <lightning:button variant="neutral"
+                          class="slds-align-middle"
+                          label="New"                          
+                          onclick="{!c.openModalNewLead}" />
+          <lightning:button variant="neutral"
+                          class="slds-align-middle"
+                          label="Edit"                          
+                          onclick="{!c.openModalEditLead}" />
+        </div>
+        <div class="slds-button-group slds-m-horizontal_x-medium" role="group">
+          <lightning:button variant="neutral"
+                          class="slds-align-middle"
+                          label="+7"                          
+                          onclick="{!c.add7DaysLead}" />
+                          <lightning:button variant="neutral"
+                          class="slds-align-middle"
+                          label="+30"                          
+                          onclick="{!c.add30DaysLead}" />
+        </div>                
+        <lightning:button variant="brand"
+                          class="slds-align-middle"
+                          label="Send message"                          
+                          onclick="{!c.openModalSendEmail}" />
+      </div>    
+    </div>    
+    <ul class="slds-grid slds-page-header__detail-row">      
+      <li class="slds-page-header__detail-block">
+        <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Company">Company</p>
+        <p class="slds-text-body_regular slds-truncate" title="Description that demonstrates truncation with a long text field">{!v.leadRecord.Company}</p>
+      </li>
+      <li class="slds-page-header__detail-block">
+        <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Title">Title</p>
+        <p class="slds-text-body_regular slds-truncate" title="Description that demonstrates truncation with a long text field">{!v.leadRecord.Title}</p>
+      </li>
+      <li class="slds-page-header__detail-block">
+        <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Phone">Phone</p>
+        <p class="slds-text-body_regular slds-truncate" title="Description that demonstrates truncation with a long text field">{!v.leadRecord.Phone}</p>
+      </li>
+      <li class="slds-page-header__detail-block">
+        <p class="slds-text-title slds-truncate slds-m-bottom_xx-small" title="Email">Email</p>
+        <p class="slds-text-body_regular slds-truncate" title="Description that demonstrates truncation with a long text field">{!v.leadRecord.Email}</p>
+      </li>
+      
+    </ul> 
+  </div>  
+</aura:component>	

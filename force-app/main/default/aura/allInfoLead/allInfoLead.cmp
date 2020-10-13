@@ -1,0 +1,144 @@
+<aura:component implements="flexipage:availableForAllPageTypes, forceCommunity:availableForAllPageTypes, force:hasRecordId" controller="LeadSinglePageController" access="global">      
+  <!-- <aura:attribute name="leadId" type="String" default="00Q2w000004j4r1EAA"/>   -->
+  <aura:attribute name="leadRecord" type="Object"/>    
+  <aura:handler name="init" value="{! this }" action="{! c.init }"/>      
+  <aura:attribute name="Spinner" type="boolean" default="true"/>  
+
+  <aura:if isTrue="{!v.Spinner}">
+    <div aura:id="spinnerId" class="slds-spinner_container">
+       <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+         <span class="slds-assistive-text">Loading</span>
+         <div class="slds-spinner__dot-a"></div>
+         <div class="slds-spinner__dot-b"></div>
+       </div>
+    </div>
+  </aura:if>
+
+  <div class="slds-form slds-box" role="list">
+    <div class="slds-form__row ">
+      <div class="slds-form__item" role="listitem">
+        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+          <span class="slds-form-element__label">Website</span>
+          <div class="slds-form-element__control">
+            <div class="slds-form-element__static">                          
+              {!v.leadRecord.Website}
+            </div>            
+          </div>
+        </div>
+      </div>
+      <div class="slds-form__item" role="listitem">
+        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+          <span class="slds-form-element__label">Rating</span>
+          <div class="slds-form-element__control">
+            <div class="slds-form-element__static">
+              {!v.leadRecord.Rating}
+            </div>            
+          </div>
+        </div>
+      </div>  
+    </div>
+    <div class="slds-form__row">
+      <div class="slds-form__item" role="listitem">
+        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+          <span class="slds-form-element__label">Connection</span>
+          <div class="slds-form-element__control">
+            <div class="slds-form-element__static">
+              <!-- <lightning:formattedDateTime 
+                value="{!v.leadRecord.LastModifiedDate}" 
+                year = "numeric"
+                month = "numeric"
+                day = "numeric"
+                hour = "2-digit"
+                minute = "2-digit"
+                hour12 = "false"/> -->
+            </div>            
+          </div>
+        </div>
+      </div>
+      <div class="slds-form__item" role="listitem">
+        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+          <span class="slds-form-element__label">Last connection</span>
+          <div class="slds-form-element__control">
+            <div class="slds-form-element__static">
+              <lightning:formattedDateTime 
+                value="{!v.leadRecord.lastConnection__c}" 
+                year = "numeric"
+                month = "numeric"
+                day = "numeric"
+                hour = "2-digit"
+                minute = "2-digit"
+                hour12 = "false"/>
+            </div>            
+          </div>
+        </div>
+      </div>      
+    </div>
+    <div class="slds-form__row">
+      <div class="slds-form__item" role="listitem">
+        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent slds-form-element_1-col">
+          <span class="slds-form-element__label">Address</span>
+          <div class="slds-form-element__control">
+            <div class="slds-form-element__static">              
+              <lightning:formattedAddress
+                street="{!v.leadRecord.Street}"
+                city="{!v.leadRecord.City}"
+                country="{!v.leadRecord.Country}"                          
+                postalCode="{!v.leadRecord.PostalCode}"
+              />
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slds-form__row">
+      <div class="slds-form__item" role="listitem">
+        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent slds-form-element_1-col">
+          <span class="slds-form-element__label">Description</span>
+          <div class="slds-form-element__control">
+            <div class="slds-form-element__static">
+              {!v.leadRecord.Description}
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slds-form__row">
+      <div class="slds-form__item" role="listitem">
+        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+          <span class="slds-form-element__label">Created By</span>
+          <div class="slds-form-element__control">
+            <div class="slds-form-element__static">
+              <lightning:formattedDateTime 
+                value="{!v.leadRecord.CreatedDate}" 
+                year = "numeric"
+                month = "numeric"
+                day = "numeric"
+                hour = "2-digit"
+                minute = "2-digit"
+                hour12 = "false"/>
+            </div>            
+          </div>
+        </div>
+      </div>
+      <div class="slds-form__item" role="listitem">
+        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+          <span class="slds-form-element__label">Last Modified By</span>
+          <div class="slds-form-element__control">
+            <div class="slds-form-element__static">
+              <lightning:formattedDateTime 
+                value="{!v.leadRecord.LastModifiedDate}" 
+                year = "numeric"
+                month = "numeric"
+                day = "numeric"
+                hour = "2-digit"
+                minute = "2-digit"
+                hour12 = "false"/>
+            </div>            
+          </div>
+        </div>
+      </div>      
+    </div>
+
+  </div>  
+
+</aura:component>	

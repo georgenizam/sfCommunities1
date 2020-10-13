@@ -1,0 +1,6 @@
+<aura:component implements="forceCommunity:layout" description="Custom Content Layout" access="global">  
+  <aura:attribute name="listLeads" type="Aura.Component[]" required="false"></aura:attribute>  
+  <section>    
+    {!v.listLeads}      
+  </section>
+</aura:component>

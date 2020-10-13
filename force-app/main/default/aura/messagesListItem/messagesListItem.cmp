@@ -1,0 +1,41 @@
+<aura:component>
+  <aura:attribute name="emailRecord" type="Object"/>
+  <aura:attribute name="messageOpen" type="Boolean" default="false"/>
+  
+  <li>
+    <div class="{! 'slds-timeline__item_expandable slds-timeline__item_email' + ( v.messageOpen == true ? ' slds-is-open' : '' )}">
+        <div class="slds-media">
+            <div class="slds-media__figure">
+                <button class="slds-button slds-button_icon" aria-controls="{!v.emailRecord.Id }" aria-expanded="{! v.messageOpen }" onclick="{! c.openEmail }">
+                    <aura:if isTrue="{! v.messageOpen }">
+                        <lightning:icon iconName="utility:chevrondown" alternativeText="Utility image" size="xx-small"/>
+                        <aura:set attribute="else">
+                            <lightning:icon iconName="utility:chevronright" alternativeText="Utility image" size="xx-small"/>
+                        </aura:set>
+                    </aura:if>
+                </button>
+                <div class="slds-icon_container slds-icon-standard-email slds-timeline__icon">
+                    <lightning:icon iconName="standard:email" alternativeText="Utility image" size="small"/>
+                </div>
+            </div>
+            <div class="slds-media__body">
+                <div class="slds-grid slds-grid_align-spread slds-timeline__trigger" style="cursor: pointer;" onclick="{!c.openEmail}">
+                    <div class="slds-grid slds-grid_vertical-align-center slds-truncate_container_75 slds-no-space">
+                        <h3 class="slds-truncate" title="{!v.emailRecord.Subject}">{!v.emailRecord.Subject}</h3>
+                    </div>
+                    <div class="slds-timeline__actions slds-timeline__actions_inline">
+                        <lightning:formattedDateTime 
+                                  value="{!v.emailRecord.CreatedDate}"
+                                  year="numeric"
+                                  month="numeric"
+                                  day="numeric"/>                            
+                    </div>
+                </div>                    
+                <article class="slds-box slds-timeline__item_details slds-theme_shade slds-m-top_x-small slds-m-horizontal_xx-small slds-p-around_medium" style="max-height: 45vh; overflow: auto; word-wrap: break-word; background-color: rgb(246	246	246);" id="task-item-expanded" aria-hidden="{!v.messageOpen}">
+                  {!v.emailRecord.TextBody}                  
+                </article>
+            </div>
+        </div>
+    </div>
+  </li>
+</aura:component>	

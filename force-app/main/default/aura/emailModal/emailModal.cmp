@@ -1,0 +1,65 @@
+<aura:component controller="EmailModalController" access="global">
+    <aura:attribute name="isModalOpen" type="Boolean" default="false"/>        
+    <aura:attribute name="leadId" type="String" /> <!-- default="00Q2w000004j4r1EAA" -->          
+    <aura:attribute name="selectedValue" type="String" access="PRIVATE"/>
+    <aura:attribute name="Spinner" type="boolean" default="false"/>  
+    <aura:attribute name="options" type="List" default="[]"/>
+    <aura:attribute name="value" type="String" default="option1"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />    
+
+    <aura:if isTrue="{!v.isModalOpen}">    
+    <div class="slds-modal slds-modal_small slds-fade-in-open">
+        <div class="slds-modal__container">
+          <aura:if isTrue="{!v.Spinner}">
+            <div aura:id="spinnerId" class="slds-spinner_container slds-spinner_color">
+                <div class="slds-spinner--brand  slds-spinner slds-spinner--large" role="alert">
+                  <span class="slds-assistive-text">Loading</span>
+                  <div class="slds-spinner__dot-a"></div>
+                  <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+          </aura:if>   
+            <div class="slds-modal__header">
+                <!-- <c:notifLeadList notifFlag="{!v.notifFlag}" successMes="{!v.successMes}" />                -->
+                <lightning:buttonIcon iconName="utility:close"
+                                      onclick="{!c.closeModal}"
+                                      alternativeText="close"
+                                      variant="bare-inverse"
+                                      size="large"
+                                      class="slds-modal__close"/>
+            <h2 class="title slds-text-heading--medium">Select a template for email</h2>
+            </div>
+            <div class="slds-modal__content slds-p-around--small">
+              <form class="slds-form_stacked">                           
+                <div class="slds-grid slds-wrap item-wrap">                  
+                  <div class="slds-col slds-size_1-of-1 slds-xx-top_small">                                                                
+                    <lightning:radioGroup name="radioGroupTemplate"
+                          label="Choose a template"
+                          options="{! v.options }"
+                          value="{! v.value }"
+                          type="radio"/>
+                  </div>
+                  <div class="slds-col slds-size_1-of-1 slds-m-top_xxx-small">                    
+                      <lightning:input aura:id="emailform" label="Subject" value="{!v.emailRecord.Subject}" name="subject" required="true" />                    
+                  </div>
+                  <div class="slds-col slds-size_1-of-1 slds-m-top_xxx-small">                                          
+                      <lightning:textarea aura:id="leadform" label="Message" value="{!v.leadRecord.Message}" name="message"  required="true" class="textarea-description"/>
+                  </div>                                     
+                </div>                
+              </form>  
+            </div>
+            <div class="slds-modal__footer slds-grid slds-grid_align-center">
+              <lightning:button variant="neutral"                                     
+                                label="Cancel"
+                                onclick="{!c.closeModal}"/>
+              <lightning:button variant="brand"                                     
+                                label="Save"
+                                onclick="{!c.saveEmailTemplate}"
+                                disabled="false" />
+            </div>
+        </div>
+    </div>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+  </aura:if>
+</aura:component>	

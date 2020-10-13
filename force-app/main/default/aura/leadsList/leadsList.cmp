@@ -1,0 +1,71 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" controller="LeadPageController" access="global">
+    <aura:attribute name="data" type="List" />
+    <aura:attribute name="columns" type="List" />
+    <aura:attribute name="sortDirection" type="String" default="asc" />
+    <aura:attribute name="defaultSortDirection" type="String" default="asc" />
+    <aura:attribute name="sortedBy" type="String" />
+    <aura:attribute name="isModalOpen" type="Boolean" default="false"/>
+    <aura:attribute name="openSpinner" type="Boolean" default="false" />
+
+    <aura:attribute name="initialRows" type="Integer" default="5"/>
+    <aura:attribute name="enableInfiniteLoading" type="Boolean" default="true"/>
+    <aura:attribute name="rowsToLoad" type="Integer" default="30"/>
+    <aura:attribute name="totalNumberOfRows" type="Integer" default="0"/>
+    <aura:attribute name="loadMoreStatus" type="String" default=""/>
+
+    <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+
+    <lightning:card class="card-wrap">
+        <aura:set attribute="title">
+            
+            <div class="wrap-title">
+              <div>
+                <lightning:icon iconName="standard:lead_list" size="medium"/>              
+              </div>              
+              <div>
+                <p class="small-title">All lead</p>
+                <p class="big-title">List lead</p>
+              </div>
+            </div>
+        </aura:set>        
+        <aura:set attribute="actions">
+            <!-- <lightning:button class="slds-align-middle" label="New"/> -->
+            <lightning:button variant="brand"
+                          class="slds-align-middle"
+                          label="New"                          
+                          onclick="{!c.openModal}" />
+        </aura:set>
+    </lightning:card>
+    <div style="height: 80vh;">    
+      <lightning:datatable
+          keyField="id"
+          columns="{!v.columns}"
+          data="{!v.data}"
+          hideCheckboxColumn="true"
+          showRowNumberColumn="true"        
+          defaultSortDirection="{!v.defaultSortDirection}"
+          sortedDirection="{!v.sortDirection}"
+          sortedBy="{!v.sortedBy}" 
+          resizeColumnDisabled="true"    
+
+          onrowaction="{!c.handleRowAction}"
+          enableInfiniteLoading="{!v.enableInfiniteLoading}"
+          loadMoreOffset="{!v.loadMoreOffset}"
+          onloadmore="{!c.loadMoreData}"
+          >
+      </lightning:datatable>  
+      <div class="slds-text-heading_small slds-text-align_center">{!v.loadMoreStatus}</div>          
+    </div> 
+    
+    <aura:if isTrue="{!v.openSpinner}">          
+        <div class="spinner">
+          <lightning:spinner alternativeText="Loading" size="large" />
+        </div>      
+    </aura:if>
+
+    <aura:if isTrue="{!v.isModalOpen}">
+      <c:leadModal isModalOpen="{!v.isModalOpen}"/>
+    </aura:if>    
+    <!-- <c:leadModal isModalTitle="test" /> -->
+
+</aura:component>

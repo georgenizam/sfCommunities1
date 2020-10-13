@@ -1,0 +1,92 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" controller="ConnectionPageController" access="global">  
+  <aura:attribute name="data" type="List" />
+  <aura:attribute name="listLeads" type="List" />
+  <aura:attribute name="columns" type="List" />
+  <aura:attribute name="sortDirection" type="String" default="asc" />
+  <aura:attribute name="defaultSortDirection" type="String" default="asc" />
+  <aura:attribute name="sortedBy" type="String" />  
+  <aura:attribute name="openSpinner" type="Boolean" default="false" />
+  <aura:attribute name="initialRows" type="Integer" default="5"/>
+  <aura:attribute name="enableInfiniteLoading" type="Boolean" default="true"/>
+  <aura:attribute name="rowsToLoad" type="Integer" default="30"/>
+  <aura:attribute name="totalNumberOfRows" type="Integer" default="0"/>
+  <aura:attribute name="loadMoreStatus" type="String" default=""/>
+
+  
+  <aura:attribute name="amountRows" type="Integer" default="5"/>
+  <aura:attribute name="amountMiddlePage" type="Integer" default="5"/>
+  <aura:attribute name="minCountPage" type="Integer" default="1"/>
+  <aura:attribute name="countPage" type="List" default="[2, 3, 4, 5, 6]"/>  
+  <aura:attribute name="curPage" type="Integer" default="1"/>
+  <aura:attribute name="maxCountPage" type="Integer"/>  
+
+  <aura:registerEvent name="updateLeadInfo" type="c:updateLeadInfo"/>
+  <aura:attribute name="Spinner" type="boolean" default="false"/>
+  <aura:handler name="init" value="{!this}" action="{!c.init}"/>  
+  <!-- <aura:handler event="c:addDaysEvent" action="{!c.handleApplicationEvent}"/> -->
+  <aura:handler event="c:addLeadToMassAction" action="{!c.handleApplicationEvent}"/>
+
+  <aura:if isTrue="{!v.Spinner}">
+    <div aura:id="spinnerId" class="slds-spinner_container">
+       <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+         <span class="slds-assistive-text">Loading</span>
+         <div class="slds-spinner__dot-a"></div>
+         <div class="slds-spinner__dot-b"></div>
+       </div>
+    </div>
+  </aura:if>
+
+  <article class="slds-card" style="max-height: 60vh; overflow: auto;">
+    <div class="slds-card__header slds-grid">
+      <header class="slds-media slds-media_center slds-has-flexi-truncate">        
+        <div class="slds-media__figure">          
+          <lightning:icon iconName="standard:list_email" alternativeText="Utility image"/>
+        </div>       
+        <div class="slds-media__body">
+          <h2 class="slds-text-heading_small slds-truncate">Mass action</h2>
+        </div>
+        <div class="slds-no-flex">          
+          <lightning:button variant="Neutral" label="+7" title="add delay 7 days" onclick="{!c.add7DaysDelay}"/>
+          <lightning:button variant="Neutral" label="+30" title="add delay 30 days" onclick="{!c.add30DaysDelay}"/>
+          <lightning:button variant="Brand" label="Mass mailing" title="Open messages list" onclick="{!c.sendMassMailing}"/>
+        </div>
+      </header>
+    </div>
+    <div class="slds-card__body slds-card__body_inner">      
+      <aura:if isTrue="{!not(empty(v.data))}">      
+        <div style="height: 35vh;">    
+          <lightning:datatable  keyField="id"
+                                columns="{!v.columns}"
+                                data="{!v.data}"
+                                resizeColumnDisabled="true"    
+                                showRowNumberColumn="false"
+                                hideCheckboxColumn="true"
+                                onrowaction="{!c.handleRowAction}"/>      
+        </div>      
+        <div  class="slds-align_absolute-center">    
+          <!-- {!v.offset==0}     -->
+          <lightning:button disabled ="" label="Prev" class="pagination-btn" onclick="{!c.doPrev}"/>
+          <div class="slds-p-left_xx-small">
+            <lightning:button name="{!v.minCountPage}" label="{!v.minCountPage}" class="{!(v.minCountPage != v.curPage) ? 'pagination-btn' : 'pagination-btn_active'}" onclick="{!c.doNavigate}"/>
+          </div>
+          
+          <aura:iteration items="{!v.countPage}" var="d">
+            <lightning:button name="{!d}" label="{!d}" class="{!(d != v.curPage) ? 'pagination-btn' : 'pagination-btn_active'}" onclick="{!c.doNavigate}"/>
+          </aura:iteration>
+          <div class="{!(v.maxCountPage == v.minCountPage) ? 'slds-p-right_medium slds-p-left_xx-small d-none' : 'slds-p-right_medium slds-p-left_xx-small'}">
+            <lightning:button name="{!v.maxCountPage}" label="{!v.maxCountPage}" class="{!(v.maxCountPage != v.curPage) ? 'pagination-btn' : 'pagination-btn_active'}" onclick="{!c.doNavigate}"/>
+          </div>        
+          <!-- <aura:if isTrue="{!not(empty(v.opportunityList))}"></aura:if> -->
+          <div class="slds-p-left_xx-small">
+            <lightning:button disabled ="" label="Next" class="pagination-btn" onclick="{!c.doNext}"/>        
+          </div>          
+          <!-- {!v.offset==v.lastPage} -->
+        </div>      
+        <aura:set attribute="else">
+          <div class="message-info">No data</div>
+        </aura:set>
+      </aura:if>
+    </div>    
+  </article>
+
+</aura:component>	

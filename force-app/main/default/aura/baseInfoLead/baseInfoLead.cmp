@@ -1,0 +1,67 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes, force:hasRecordId" controller="ConnectionPageController" access="global">
+  <aura:attribute name="leadRecord" type="Object"/>    
+  <!-- <aura:handler name="init" value="{! this }" action="{! c.init }"/> -->
+  <aura:attribute name="Spinner" type="boolean" default="false"/>  
+  <aura:handler event="c:updateLeadInfo" action="{!c.updateData}"/>  
+
+  <aura:if isTrue="{!v.Spinner}">
+    <div aura:id="spinnerId" class="slds-spinner_container">
+       <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+         <span class="slds-assistive-text">Loading</span>
+         <div class="slds-spinner__dot-a"></div>
+         <div class="slds-spinner__dot-b"></div>
+       </div>
+    </div>
+  </aura:if>
+
+ 
+    <article class="slds-card">      
+      <div class="slds-card__header slds-grid">
+        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+          
+          <div class="slds-media__body">
+            <h2 class="slds-text-heading_small slds-truncate">{!v.leadRecord.Name}</h2>
+          </div>
+          <div class="slds-no-flex">            
+            <lightning:button variant="Neutral" label="Details" title="Open lead details" onclick="{!c.openLeadDetails}"/>
+          </div>
+        </header>
+      </div>
+      <div class="slds-card__body slds-card__body_inner">
+        <div class="slds-tile__detail">
+          <dl class="slds-list_horizontal slds-wrap">
+            <dt class="slds-item_label slds-truncate" title="Title">Title:</dt>
+            <dd class="slds-item_detail slds-truncate" title="Description title">{!v.leadRecord.Title}</dd>
+            <dt class="slds-item_label slds-truncate" title="Company">Company:</dt>
+            <dd class="slds-item_detail slds-truncate" title="Description company">{!v.leadRecord.Company}</dd>
+            <dt class="slds-item_label slds-truncate" title="Last connection">Last connection:</dt>
+            <dd class="slds-item_detail slds-truncate" title="Description last connection">
+              <lightning:formattedDateTime 
+                  value="{!v.leadRecord.lastConnection__c}" 
+                  year = "numeric"
+                  month = "numeric"
+                  day = "numeric"
+                  hour = "2-digit"
+                  minute = "2-digit"
+                  hour12 = "false"/>
+            </dd>
+            <dt class="slds-item_label slds-truncate" title="Address">Address:</dt>
+            <dd class="slds-item_detail slds-truncate" title="Description address">
+              <lightning:formattedAddress
+                  street="{!v.leadRecord.Street}"
+                  city="{!v.leadRecord.City}"
+                  country="{!v.leadRecord.Country}"                
+                  postalCode="{!v.leadRecord.PostalCode}"
+                />
+            </dd>
+          </dl>
+        </div>
+      </div>    
+        <!-- <aura:set attribute="else">
+          <div class="message-info">No data</div>
+        </aura:set> -->      
+    </article>
+    
+  
+
+</aura:component>	

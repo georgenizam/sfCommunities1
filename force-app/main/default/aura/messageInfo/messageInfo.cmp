@@ -1,0 +1,75 @@
+<aura:component implements="flexipage:availableForAllPageTypes, forceCommunity:availableForAllPageTypes, force:hasRecordId" controller="MessagePageController" access="global">  
+  <!-- <aura:attribute name="recordId" type="String" default="00Q2w000004j4r1EAA"/>   -->
+  <aura:attribute name="record" type="Object"/>    
+  <!-- <aura:handler name="init" value="{! this }" action="{! c.init }"/> -->
+  <aura:attribute name="Spinner" type="boolean" default="false"/>
+  <aura:handler event="c:sendMessageInfo" action="{!c.handleApplicationEvent}"/>
+  <!-- <aura:handler event="c:addDaysEvent" action="{!c.handleApplicationEvent}"/> -->
+
+  <aura:if isTrue="{!v.Spinner}">
+    <div aura:id="spinnerId" class="slds-spinner_container">
+       <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+         <span class="slds-assistive-text">Loading</span>
+         <div class="slds-spinner__dot-a"></div>
+         <div class="slds-spinner__dot-b"></div>
+       </div>
+    </div>
+  </aura:if>  
+  
+  <div class="slds-form slds-box" role="list">  
+    <aura:if isTrue="{!not(v.record)}">
+      <div class="container-empty">
+        <h1>No email info</h1>
+      </div>
+      <aura:set attribute="else">
+        <div class="slds-form__row slds-form__item">
+          <legend class="slds-form-element__legend slds-form-element__label">Message</legend>
+          <div class="slds-form-element__control">
+            <div class="slds-form-element__row slds-grid">
+
+              <div class="slds-grid slds-size_1-of-1 slds-wrap">
+                <div class="slds-col slds-size_1-of-2">
+                  <div class="slds-truncate">
+                    <lightning:formattedDateTime 
+                            value="{!v.record.CreatedDate}" 
+                            year = "numeric"
+                            month = "numeric"
+                            day = "numeric"/>                
+                  </div>
+                </div>
+                <div class="slds-col slds-size_1-of-2">
+                  <span class="slds-form-element__label">Name</span>              
+                  <div class="">{!v.record.Name}</div>            
+                </div>                    
+              </div>
+              
+            </div>
+          </div>
+        </div>          
+        <div class="slds-form__row">      
+          <div class="slds-form__item" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+              <span class="slds-form-element__label">Subject</span>
+              <div class="slds-form-element__control">
+                <div class="">{!v.record.Subject}</div>            
+              </div>
+            </div>
+          </div>            
+        </div>
+        <div class="slds-form__row">
+          <div class="slds-form__item slds-m-top_medium" role="listitem">
+            <div class="slds-form-element slds-form-element_edit slds-form-element_stacked slds-hint-parent slds-form-element_1-col">          
+              <div class="slds-form-element__control">                        
+                <div class="slds-media slds-media_center">                
+                  <div class="slds-media__body slds-box email-color">
+                    <p>{!v.record.TextBody}</p>
+                  </div>
+                </div>            
+              </div>
+            </div>
+          </div>
+        </div>    
+      </aura:set>
+    </aura:if>    
+  </div>    
+</aura:component>	

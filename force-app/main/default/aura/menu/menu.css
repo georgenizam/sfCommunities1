@@ -1,0 +1,26 @@
+.THIS.menu__wrapper {
+  width: 100%;
+  display: flex;    
+  border-bottom: 2px solid rgb(35	156	216); 	
+}
+
+.THIS .menu__item {
+  font-size: 14px;
+  font-weight: 500;
+  border-top: 2px solid transparent;  
+  /* line-height: 30px; */
+  line-height: 1.2;  
+  padding: 10px 25px;
+  cursor: pointer;
+  transition: all .25s ease;
+} 
+
+.THIS .menu__item:hover {
+  border-top: 2px solid rgba(21, 137, 238, 0.05);
+  background-color: rgb(232	243	252);
+}
+
+.THIS .menu__item.active {
+  border-top: 2px solid rgb(35	156	216);
+  background-color: rgb(232	243	252);
+}

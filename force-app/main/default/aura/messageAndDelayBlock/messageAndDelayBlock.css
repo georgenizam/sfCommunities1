@@ -1,0 +1,23 @@
+.THIS .bar-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; 
+  font-weight: wrap; 
+  align-items: center;
+  margin-top: 10px;
+}
+.THIS .bar-container .bar-container__title { 
+  text-align: left;
+  width: 70px;
+}
+.THIS .bar-container .bar-container__content {
+  width: 80%;  
+}
+.THIS .bar-container .bar-container__amount {  
+  text-align: right;
+  font-weight: 700;
+}
+
+.THIS .email-color {
+  background-color: rgb(242	242	242);
+}

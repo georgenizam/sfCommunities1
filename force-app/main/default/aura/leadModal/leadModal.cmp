@@ -1,0 +1,132 @@
+<aura:component controller="LeadModalController" access="global">
+    <aura:attribute name="isModalOpen" type="Boolean" default="false"/>    
+    <aura:attribute name="notifFlag" type="Boolean" default="false"/>    
+    <aura:attribute name="successMes" type="Boolean" default="true"/> 
+    <aura:attribute name="leadRecord" type="Lead" default="{ 'sobjectType': 'Lead' }"/>
+    <aura:attribute name="edit" type="Boolean"/>       
+    <aura:attribute name="leadId" type="String" default="00Q2w000004j4r1EAA"/>  
+    <aura:attribute name="titleForm" type="String"/>       
+    <aura:attribute name="options" type="List" access="PRIVATE"/>
+    <aura:attribute name="selectedValue" type="String" access="PRIVATE"/>
+    <aura:attribute name="Spinner" type="boolean" default="false"/>  
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />    
+
+    <aura:if isTrue="{!v.isModalOpen}">    
+    <div class="slds-modal slds-modal_small slds-fade-in-open">
+        <div class="slds-modal__container">
+          <aura:if isTrue="{!v.Spinner}">
+            <div aura:id="spinnerId" class="slds-spinner_container slds-spinner_color">
+                <div class="slds-spinner--brand  slds-spinner slds-spinner--large" role="alert">
+                  <span class="slds-assistive-text">Loading</span>
+                  <div class="slds-spinner__dot-a"></div>
+                  <div class="slds-spinner__dot-b"></div>
+                </div>
+            </div>
+          </aura:if>   
+            <div class="slds-modal__header">
+                <!-- <c:notifLeadList notifFlag="{!v.notifFlag}" successMes="{!v.successMes}" />                -->
+                <lightning:buttonIcon iconName="utility:close"
+                                      onclick="{!c.closeModal}"
+                                      alternativeText="close"
+                                      variant="bare-inverse"
+                                      size="large"
+                                      class="slds-modal__close"/>
+                <h2 class="title slds-text-heading--medium">{!v.titleForm}</h2>
+            </div>
+            <div class="slds-modal__content slds-p-around--small">
+              <form class="slds-form_stacked">                           
+                <div class="slds-grid slds-wrap item-wrap">
+                  <div class="slds-col slds-size_1-of-1">
+                    <h1>Name</h1>
+                  </div>
+                  <div class="slds-grid slds-size_1-of-1">
+                    <div class="slds-col">
+                      <lightning:input aura:id="leadform" label="First name" value="{!v.leadRecord.FirstName}" name="firstName" />
+                    </div>
+                    <div class="slds-col">
+                      <lightning:input aura:id="leadform" label="Last name" value="{!v.leadRecord.LastName}" name="lastName" required="true" />
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-grid slds-wrap item-wrap">
+                  <div class="slds-col slds-size_1-of-1">
+                    <h1>Company</h1>
+                  </div>
+                  <div class="slds-grid slds-size_1-of-1 slds-wrap">
+                    <div class="slds-col slds-size_1-of-2">
+                      <lightning:input aura:id="leadform" label="Company" value="{!v.leadRecord.Company}" name="company" required="true" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                      <lightning:input aura:id="leadform" label="Title" value="{!v.leadRecord.Title}" name="title" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                      <lightning:input aura:id="leadform" type="url" value="{!v.leadRecord.Website}" label="Website" name="website" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">                    
+                      <lightning:select name="rating" label="Rating" aura:id="leadform" value="{!v.selectedValue}">
+                          <aura:iteration items="{!v.options}" var="option">
+                              <option text="{!option.label}" value="{!option.id}" selected="{!option.selected}"/>
+                          </aura:iteration>
+                      </lightning:select>
+                    </div>
+                  </div>
+                </div>
+                <div class="slds-grid slds-wrap item-wrap">
+                  <div class="slds-col slds-size_1-of-1">
+                    <h1>Connection</h1>
+                  </div>
+                  <div class="slds-grid slds-size_1-of-1 slds-wrap">
+                    <div class="slds-col slds-size_1-of-2">
+                      <lightning:input aura:id="leadform" type="tel" value="{!v.leadRecord.Phone}" label="Phone" name="phone" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-2">
+                      <lightning:input aura:id="leadform" type="email" value="{!v.leadRecord.Email}" label="Email" name="email" />
+                    </div>                    
+                  </div>
+                </div>
+                <div class="slds-grid slds-wrap item-wrap">
+                  <div class="slds-col slds-size_1-of-1">
+                    <h1>Address</h1>
+                  </div>
+                  <div class="slds-grid slds-size_1-of-1 slds-wrap">
+                    <div class="slds-col slds-size_1-of-3">
+                      <lightning:input aura:id="leadform" value="{!v.leadRecord.Street}" label="Street" name="street" />
+                    </div>
+                    <div class="slds-col slds-size_1-of-3">
+                      <lightning:input aura:id="leadform" value="{!v.leadRecord.City}" label="City" name="city" />
+                    </div>                    
+                    <div class="slds-col slds-size_1-of-3">
+                      <lightning:input aura:id="leadform" value="{!v.leadRecord.State}" label="State" name="state" />
+                    </div>                    
+                    <div class="slds-col slds-size_1-of-3">
+                      <lightning:input aura:id="leadform" type="number" value="{!v.leadRecord.PostalCode}" label="PostalCode" name="postalCode" />
+                    </div>                    
+                    <div class="slds-col slds-size_1-of-3">
+                      <lightning:input aura:id="leadform" value="{!v.leadRecord.Country}" label="Country" name="country" />
+                    </div>                    
+                  </div>
+                </div>                
+                <div class="slds-grid slds-wrap item-wrap">
+                  <div class="slds-col slds-size_1-of-1">
+                    <h1>Description</h1>
+                  </div>
+                  <div class="slds-col slds-size_1-of-1">                    
+                    <lightning:textarea aura:id="leadform" value="{!v.leadRecord.Description}" name="description" class="textarea-description"/>
+                  </div>
+                </div>              
+              </form>  
+            </div>
+            <div class="slds-modal__footer slds-grid slds-grid_align-center">
+              <lightning:button variant="neutral"                                     
+                                label="Cancel"
+                                onclick="{!c.closeModal}"/>
+              <lightning:button variant="brand"                                     
+                                label="Save"
+                                onclick="{!c.saveLead}"
+                                disabled="false" />
+            </div>
+        </div>
+    </div>
+      <div class="slds-backdrop slds-backdrop_open"></div>
+  </aura:if>
+</aura:component>	

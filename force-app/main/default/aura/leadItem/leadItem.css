@@ -1,0 +1,96 @@
+.THIS {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: .25rem;
+  border: 1px solid #d4d4d4;  
+}
+
+.THIS .title {
+  font-size: 25px;
+}
+
+.THIS .small-text {
+  font-size: 12px;  
+}
+
+.THIS .amount-7-days {
+  font-size: 30px;
+  margin-top: 12px;
+}
+
+.THIS .amount-all-time {
+  font-size: 35px;
+}
+
+.THIS .blue-text {
+  color: #16325c;
+}
+
+.THIS .today-amount {
+  font-weight: 400;
+  font-size: 60px;
+}
+
+.THIS .item {
+  padding: 20px 0;
+  border-bottom: 1px solid rgb(229 229	229);
+}
+
+.THIS .item:last-child {
+  padding: 20px 0;
+  border-bottom: none;
+}
+
+.THIS .bars-wrap {  
+  background-color: rgb(245	245	245);
+  padding: 1rem;
+  border-radius: .25rem;
+  border: 1px solid #d4d4d4; 
+}
+
+.THIS .bars-wrap .bars {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  max-height: 120px;
+  height: 120px;
+}
+
+.THIS .bars-wrap .bars .bar {
+  max-height: 120px;
+  background-color: rgb(183	205	222);
+  height: 1px;
+  width: calc(100% / 7);
+  /* border: 0.1px solid rgb(245	245	245); */
+  transition: all .25s ease;
+}
+
+.THIS .bars-wrap .bars .bar:hover {
+  background-color: rgb(10 88 148);
+}
+
+.THIS .bars-wrap .bars-descr {
+  display: flex;
+  justify-content: space-between;
+}
+
+.THIS .bars-wrap .bars-descr .descr {
+  width: calc(100% / 7);
+  word-wrap: break-word;
+  text-align: center;
+  line-height: 1.2;
+  font-size: 10px;
+  margin-top: 4px;
+}
+
+.THIS .item .times-week {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;  
+  width: 100%;
+  padding: 0 15px;
+}
+
+.THIS .item .times-week .date {
+  max-width: 50%;
+}

@@ -1,0 +1,20 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes" controller="HomePageInfoController" access="global">  
+  <aura:attribute name="setMeOnInit" type="Map" default="{ amountToday: '0', amount7Days: '0',  amount30Days: '0', amountAllTime: '0'}" />  
+  <aura:attribute name="bars" type="Map" default="{ 0: {percent: 0, amount: 0}, 1: {percent: 0, amount: 0}, 2: {percent: 0, amount: 0}, 3: {percent: 0, amount: 0}, 4: {percent: 0, amount: 0}, 5: {percent: 0, amount: 0}, 6: {percent: 0, amount: 0}}" />
+  <aura:attribute name="weekTimes" type="Map" default="{ startWeek: '', endWeek: '' }" />  
+  <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>   
+  <aura:attribute name="Spinner" type="boolean" default="false"/>  
+
+  <aura:if isTrue="{!v.Spinner}">
+    <div aura:id="spinnerId" class="slds-spinner_container">
+        <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+          <span class="slds-assistive-text">Loading</span>
+          <div class="slds-spinner__dot-a"></div>
+          <div class="slds-spinner__dot-b"></div>
+        </div>
+    </div>
+  </aura:if>
+
+  <c:homeItem title="Lead" bars="{!v.bars}" setMeOnInit="{!v.setMeOnInit}" weekTimes="{!v.weekTimes}"/>
+  
+</aura:component>

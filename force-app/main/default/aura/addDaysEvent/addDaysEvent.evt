@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Send add amount days">
+    <aura:attribute name="days" type="Integer"/>
+</aura:event>

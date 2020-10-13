@@ -1,0 +1,23 @@
+<aura:component implements="forceCommunity:layout" description="Custom Content Layout" access="global">  
+  <aura:attribute name="connection" type="Aura.Component[]" required="false"></aura:attribute>  
+  <aura:attribute name="base_info_lead" type="Aura.Component[]" required="false"></aura:attribute>  
+  <aura:attribute name="all_messages_lead" type="Aura.Component[]" required="false"></aura:attribute>  
+  <aura:attribute name="mass_action" type="Aura.Component[]" required="false"></aura:attribute>  
+  
+  <section>
+    <div class="slds-grid slds-gutters">
+      <div class="slds-col slds-size_2-of-3">
+        <div class="slds-grid slds-grid_vertical slds-grid_pull-padded-medium">
+          <div class="slds-col slds-p-vertical_medium">{!v.connection}</div>
+          <div class="slds-col slds-p-vertical_medium">{!v.mass_action}</div>
+        </div>        
+      </div>
+      <div class="slds-col slds-size_1-of-3">
+        <div class="slds-grid slds-grid_vertical">
+          <div class="slds-col slds-p-vertical_medium">{!v.base_info_lead}</div>
+          <div class="slds-col slds-p-vertical_medium">{!v.all_messages_lead}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+</aura:component>

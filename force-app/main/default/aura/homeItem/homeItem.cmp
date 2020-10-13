@@ -1,0 +1,50 @@
+<aura:component access="global">
+  <aura:attribute name="title" type="String" default="Title" />
+  <aura:attribute name="bars" type="Map" default="{ 0: {percent: 0, amount: 0}, 1: {percent: 0, amount: 0}, 2: {percent: 0, amount: 0}, 3: {percent: 0, amount: 0}, 4: {percent: 0, amount: 0}, 5: {percent: 0, amount: 0}, 6: {percent: 0, amount: 0}}" />
+  <aura:attribute name="setMeOnInit" type="Map" default="{ amountToday: '0', amount7Days: '0',  amount30Days: '0', amountAllTime: '0'}" />  
+  <aura:attribute name="weekTimes" type="Map" default="{ startWeek: '', endWeek: '' }" />  
+
+  <div class="box-wrap">
+    <div class="item">
+      <div class="slds-text-align_center slds-text-color_weak title">{!v.title}</div>
+    </div>
+    <div class="item">
+      <div class="slds-text-align_center slds-text-color_inverse-weak slds-text-title_caps small-text">today</div>
+      <div class="slds-text-align_center today-amount blue-text">{!v.setMeOnInit.amountToday}</div>
+    </div>
+    <div class="item">
+      <div class="slds-text-align_center slds-text-color_inverse-weak slds-text-title_caps small-text">last 7 days</div>
+      <div class="slds-text-align_center blue-text amount-7-days">{!v.setMeOnInit.amount7Days}</div>
+    </div>
+    <div class="item">
+      <div class="bars-wrap">
+        <div class="bars">
+          <div style="{!'height:'+v.bars[0].percent+'%; min-height: 1px;'}" class="bar"></div>
+          <div style="{!'height:'+v.bars[1].percent+'%; min-height: 1px;'}" class="bar"></div>
+          <div style="{!'height:'+v.bars[2].percent+'%; min-height: 1px;'}" class="bar"></div>
+          <div style="{!'height:'+v.bars[3].percent+'%; min-height: 1px;'}" class="bar"></div>
+          <div style="{!'height:'+v.bars[4].percent+'%; min-height: 1px;'}" class="bar"></div>
+          <div style="{!'height:'+v.bars[5].percent+'%; min-height: 1px;'}" class="bar"></div>
+          <div style="{!'height:'+v.bars[6].percent+'%; min-height: 1px;'}" class="bar"></div>
+        </div>
+        <div class="bars-descr">
+          <div class="descr">{!v.bars[0].amount}</div>
+          <div class="descr">{!v.bars[1].amount}</div>
+          <div class="descr">{!v.bars[2].amount}</div>
+          <div class="descr">{!v.bars[3].amount}</div>
+          <div class="descr">{!v.bars[4].amount}</div>
+          <div class="descr">{!v.bars[5].amount}</div>
+          <div class="descr">{!v.bars[6].amount}</div>
+        </div>        
+      </div>
+      <div class="times-week">
+        <span class="date">{!v.weekTimes.startWeek}</span>
+        <span class="date">{!v.weekTimes.endWeek}</span>
+      </div>
+    </div>
+    <div class="item">
+      <div class="slds-text-align_center slds-text-color_inverse-weak slds-text-title_caps small-text">last 30 days / all time</div>
+      <div class="slds-text-align_center blue-text amount-all-time">{!v.setMeOnInit.amount30Days} / {!v.setMeOnInit.amountAllTime}</div>
+    </div>    
+  </div>
+</aura:component>	

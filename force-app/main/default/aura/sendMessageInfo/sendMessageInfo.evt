@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Send info message">
+    <aura:attribute name="leadId" type="String"/>
+</aura:event>

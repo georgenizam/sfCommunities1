@@ -1,0 +1,16 @@
+<aura:component implements="forceCommunity:layout" description="Custom Content Layout" access="global">
+  <aura:attribute name="menu" type="Aura.Component[]" required="false"></aura:attribute>
+  <aura:attribute name="listMessages" type="Aura.Component[]" required="false"></aura:attribute>  
+  <aura:attribute name="messageInfo" type="Aura.Component[]" required="false"></aura:attribute>  
+  
+  <section>
+    <div class="slds-grid slds-gutters">
+      <div class="slds-col slds-size_2-of-3">
+        {!v.listMessages}
+      </div>
+      <div class="slds-col slds-size_1-of-3">
+        {!v.messageInfo}
+      </div>
+    </div>    
+  </section>
+</aura:component>

@@ -1,0 +1,40 @@
+.THIS .pagination-btn {
+  background-color: transparent;
+  outline: none;
+  transition: all .25s ease;
+  color: rgb(33 155	215);
+}
+
+.THIS.pagination-btn:hover {
+  background-color: rgb(33 155	215);
+  border-color: rgb(33 155	215);
+  color: #fff;
+}
+
+.THIS .message-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  font-size: 25px;
+  font-weight: 500;
+  color: rgb(123 118	143);
+}
+
+.THIS .pagination-btn_active {
+  background-color: rgb(33 155	215);
+  border-color: rgb(33 155	215);
+  color: #fff; 
+}
+
+.THIS .d-none {
+  display: none;
+}
+
+/* .THIS table tbody td .slds-button {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;  
+  line-height: 1;
+} */

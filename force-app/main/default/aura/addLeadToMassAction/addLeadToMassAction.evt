@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Add lead to mass action">
+    <aura:attribute name="lead" type="Lead"/>
+</aura:event>

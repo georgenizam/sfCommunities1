@@ -1,0 +1,42 @@
+<aura:component implements="forceCommunity:availableForAllPageTypes, force:hasRecordId" controller="ConnectionPageController" access="global">  
+  <aura:attribute name="Spinner" type="boolean" default="false"/> 
+  <aura:attribute name="emailRecords" type="List"/>
+  <aura:attribute name="messageOpen" type="Boolean" default="false"/>
+  <aura:handler event="c:updateLeadInfo" action="{!c.updateData}"/>  
+  <!-- <aura:handler name="init" value="{!this}" action="{!c.init}"/> -->  
+  <article class="slds-card" style="max-height: 60vh; overflow: auto;">
+    
+      <div class="slds-card__header slds-grid">
+        <header class="slds-media slds-media_center slds-has-flexi-truncate">
+          
+          <div class="slds-media__body">
+            <h2 class="slds-text-heading_small slds-truncate">Messages</h2>
+          </div>
+          <div class="slds-no-flex">
+            <lightning:button variant="Neutral" label="List" title="Open messages list" onclick="{!c.openMessagesList}"/>
+          </div>
+        </header>
+      </div>
+      <div class="slds-card__body slds-card__body_inner">        
+        <aura:if isTrue="{!v.Spinner}">
+          <div aura:id="spinnerId" class="slds-spinner_container">
+            <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+              <span class="slds-assistive-text">Loading</span>
+              <div class="slds-spinner__dot-a"></div>
+              <div class="slds-spinner__dot-b"></div>
+            </div>
+          </div>
+        </aura:if>
+        <aura:if isTrue="{!not(empty(v.emailRecords))}">                        
+          <ul class="slds-timeline">
+            <aura:iteration items="{!v.emailRecords}" var="record">         
+              <c:messagesListItem emailRecord="{!record}"/>                  
+            </aura:iteration>
+          </ul>
+          <aura:set attribute="else">          
+            <div class="message-info">No data</div>        
+          </aura:set> 
+        </aura:if>
+      </div>       
+  </article>
+</aura:component>	

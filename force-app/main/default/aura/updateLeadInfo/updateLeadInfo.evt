@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="Update info about lead on Connection page">
+    <aura:attribute name="leadId" type="String"/>    
+</aura:event>
+

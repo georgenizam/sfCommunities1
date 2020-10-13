@@ -1,0 +1,86 @@
+
+<aura:component implements="flexipage:availableForAllPageTypes, forceCommunity:availableForAllPageTypes, force:hasRecordId" controller="LeadSinglePageController" access="global">  
+  <!-- <aura:attribute name="leadId" type="String" default="00Q2w000004j4r1EAA"/>   -->
+  <aura:attribute name="record" type="Object"/>    
+  <aura:handler name="init" value="{! this }" action="{! c.init }"/>
+  <aura:attribute name="Spinner" type="boolean" default="false"/>
+  <aura:handler event="c:addDaysEvent" action="{!c.handleApplicationEvent}"/>
+
+  <aura:if isTrue="{!v.Spinner}">
+    <div aura:id="spinnerId" class="slds-spinner_container">
+       <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+         <span class="slds-assistive-text">Loading</span>
+         <div class="slds-spinner__dot-a"></div>
+         <div class="slds-spinner__dot-b"></div>
+       </div>
+    </div>
+  </aura:if>
+  
+  <div class="slds-form slds-box" role="list">       
+    <div class="slds-form__row">
+      <div class="slds-form__item" role="listitem">
+        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent slds-form-element_1-col">                    
+          <div class="slds-form-element__control">
+            <legend class="slds-form-element__legend slds-form-element__label">Total message {!v.record.emailAmount}</legend>            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slds-form__row">
+      <div class="slds-form__item" role="listitem">
+        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent slds-form-element_1-col">                    
+          <div class="slds-form-element__control">
+            <legend class="slds-form-element__legend slds-form-element__label">Delays</legend>                        
+            <div class="bar-container">                      
+              <span class="bar-container__title">Week (+7)</span>
+              <div class="bar-container__content">
+                <div class="slds-progress-bar slds-progress-bar_large" aria-valuemin="0" aria-valuemax="{!v.record.maxwidthBar}" aria-valuenow="{!v.record.delay_7_days}" role="progressbar">                                                  
+                  <span class="slds-progress-bar__value" style="{!'width:' + v.record.widthBar7days +'%;'}"></span>
+                </div>
+              </div>                  
+              <span class="bar-container__amount">{!v.record.delay_7_days}</span>
+            </div>                              
+            <div class="bar-container">
+              <span class="bar-container__title">Week (+30)</span>
+              <div class="bar-container__content">
+                <div class="slds-progress-bar slds-progress-bar_large" aria-valuemin="0" aria-valuemax="{!v.record.maxwidthBar}" aria-valuenow="{!v.record.delay_30_days}" role="progressbar">                                
+                  <span class="slds-progress-bar__value" style="{!'width:' + v.record.widthBar30days +'%;'}"></span>
+                </div>
+              </div>                  
+              <span class="bar-container__amount">{!v.record.delay_30_days}</span>
+            </div>                                          
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="slds-form__row">
+      <div class="slds-form__item" role="listitem">
+        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+          <span class="slds-form-element__label">Subject</span>
+          <div class="slds-form-element__control">
+            <div class="slds-truncate">{!v.record.subjectEmail}</div>            
+          </div>
+        </div>
+      </div>
+      <div class="slds-form__item" role="listitem">
+        <div class="slds-form-element slds-form-element_edit slds-form-element_readonly slds-form-element_stacked slds-hint-parent">
+          <span class="slds-form-element__label">Date</span>
+          <div class="slds-form-element__control">{!v.record.dateEmail}</div>
+        </div>
+      </div>
+    </div>
+    <div class="slds-form__row">
+      <div class="slds-form__item slds-m-top_medium" role="listitem">
+        <div class="slds-form-element slds-form-element_edit slds-form-element_stacked slds-hint-parent slds-form-element_1-col">          
+          <div class="slds-form-element__control">                        
+            <div class="slds-media slds-media_center">                
+              <div class="slds-media__body slds-box email-color">
+                <p>{!v.record.bodyEmail}</p>
+              </div>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>    
+  </div>    
+</aura:component>	
